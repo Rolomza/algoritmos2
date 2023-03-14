@@ -15,18 +15,17 @@ class AVLNode:
 # EJERCICIO 1 
 
 def rotateLeft(Tree, avlnode):
+    # La nueva raiz es el hijo derecho de la antigua raiz
     Tree.root = avlnode.rightnode
     avlnode.rightnode.parent = None
-
+    # Si el hijo derecho de la antigua raiz tenia un hijo izquierdo, este pasa a ser hijo derecho de la antigua raiz
     if Tree.root.leftnode != None:
         avlnode.rightnode = Tree.root.leftnode
         Tree.root.leftnode.parent = avlnode
-
+    # La antigua raiz pasa a ser hijo izquierdo de la nueva raiz
     Tree.root.leftnode = avlnode
     avlnode.parent = Tree.root
-
-
-
+    # Retorno la nueva raiz del arbol
     return Tree.root
 
 
