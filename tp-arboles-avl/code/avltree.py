@@ -28,6 +28,18 @@ def rotateLeft(Tree, avlnode):
     # Retorno la nueva raiz del arbol
     return Tree.root
 
+def rotateRight(Tree,avlnode):
+    # La nueva raiz es el hijo izquierdo de la antigua raiz
+    Tree.root = avlnode.leftnode
+    avlnode.leftnode.parent = None
+    # Si el hijo izquierdo de la antigua raiz tenia un hijo derecho, este pasa a ser hijo izquierdo de la antigua raiz
+    if Tree.root.rightnode != None:
+        avlnode.leftnode = Tree.root.rightnode
+        Tree.root.rightnode.parent = avlnode
+    # La antigua raiz pasa a ser hijo derecho de la nueva raiz
+    Tree.root.rightnode = avlnode
+    # Retorno la nueva raiz del arbol
+    return Tree.root
 
 
 
