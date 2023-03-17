@@ -22,13 +22,14 @@ print('Initial Tree root:', myAvlTree.root.value)
 print('Initial root rightnode', myAvlTree.root.rightnode.value)
 print('Initial root rightnode', myAvlTree.root.rightnode.rightnode.value)
 
-reBalance(myAvlTree)
 
-print(myAvlTree.root.value)
+rotateLeft(myAvlTree, myAvlTree.root)
 
-# print('Final tree root',myAvlTree.root.value)
-# print('Initial root leftnode', myAvlTree.root.leftnode.value)
-# print('Initial root rightnode', myAvlTree.root.rightnode.value)
+print('Final tree root:', myAvlTree.root.value)
+print(myAvlTree.root.leftnode.value)
+print(myAvlTree.root.rightnode.value)
+print('papa de 20', myAvlTree.root.leftnode.parent.value)
+print('papa de 40', myAvlTree.root.rightnode.parent.value)
 
 
 

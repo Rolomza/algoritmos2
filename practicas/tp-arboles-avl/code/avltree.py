@@ -15,16 +15,22 @@ class AVLNode:
 # EJERCICIO 1 
 
 def rotateLeft(Tree, avlnode):
-    # La nueva raiz es el hijo derecho de la antigua raiz
-    Tree.root = avlnode.rightnode
-    avlnode.rightnode.parent = None
+    # El nuevo nodo raiz es el hijo derecho de la antigua raiz
+    newRootNode = avlnode.rightnode
+    # Si el nodo raiz anterior era la raiz del arbol, asignar su hijo derecho como nueva raiz del arbol
+    if avlnode.parent == None:
+        Tree.root = newRootNode
+        newRootNode.parent = None
+    else:
+        # Sino asigno como padre del nuevo nodo raiz al padre del antiguo nodo raiz
+        newRootNode.parent = avlnode.parent
     # Si el hijo derecho de la antigua raiz tenia un hijo izquierdo, este pasa a ser hijo derecho de la antigua raiz
-    if Tree.root.leftnode != None:
-        avlnode.rightnode = Tree.root.leftnode
-        Tree.root.leftnode.parent = avlnode
-    # La antigua raiz pasa a ser hijo izquierdo de la nueva raiz
-    Tree.root.leftnode = avlnode
-    avlnode.parent = Tree.root
+    if newRootNode.leftnode != None:
+        avlnode.rightnode = newRootNode.leftnode
+        newRootNode.leftnode.parent = avlnode
+    # El antiguo nodo raiz pasa a ser el hijo izquierdo del nuevo nodo raiz
+    newRootNode.leftnode = avlnode
+    avlnode.parent = newRootNode
     # Retorno la nueva raiz del arbol
     return Tree.root
 
@@ -106,6 +112,14 @@ def reBalance(AVLTree):
         rotateLeft(AVLTree, AVLTree.root)
     if AVLTree.root.bf > 1:
         rotateRight(AVLTree,AVLTree.root)
+
+# EJERCICIO 4
+
+
+
+# EJERCICIO 5
+
+
 
 # Implementaciones Binary tree: search, insert, delete, deleteKey, access, update
 
