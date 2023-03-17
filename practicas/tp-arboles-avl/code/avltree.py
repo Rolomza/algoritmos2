@@ -1,6 +1,3 @@
-import linkedlist
-import myqueue
-
 class AVLTree:
     root = None
 
@@ -93,22 +90,28 @@ def calculateBalance(AVLTree):
 # EJERCICIO 3
 
 def reBalanceR(AVLTree, avlnode):
+    # Caso base
     if avlnode == None:
         return
+    # Detecto si el nodo tiene desbalance hacia la derecha
     if avlnode.bf < -1:
+        # Se detecta si el hijo derecho tiene un hijo izquierdo
         if avlnode.rightnode.bf > 0:
             rotateRight(AVLTree, avlnode.rightnode)
             avlnode = rotateLeft(AVLTree, avlnode)
         else:
             avlnode = rotateLeft(AVLTree, avlnode)
         calculateBalance(AVLTree)
+    # Detecto si el nodo tiene desbalance hacia la izquierda
     elif avlnode.bf > 1:
+        # Se detecta si el hijo izquierdo tiene un hijo derecho
         if avlnode.leftnode.bf < 0:
             rotateLeft(AVLTree, avlnode.leftnode)
             avlnode = rotateRight(AVLTree, avlnode)
         else:
             avlnode = rotateRight(AVLTree, avlnode)
         calculateBalance(AVLTree)
+    # Llamadas recursivas
     reBalanceR(AVLTree, avlnode.leftnode)
     reBalanceR(AVLTree, avlnode.rightnode)
 
@@ -314,21 +317,6 @@ def recursiveInOrderTreeWalk(treeNode):
         recursiveInOrderTreeWalk(treeNode.leftnode)
         print(treeNode.value)
         recursiveInOrderTreeWalk(treeNode.rightnode)
-
-def traverseBreadFirst(B):
-    queue = linkedlist.LinkedList()
-    valuesQueue = linkedlist.LinkedList()
-    myqueue.enqueue(queue,B.root)
-
-    while queue.head != None:
-        node = myqueue.dequeue(queue)
-        myqueue.enqueue(valuesQueue,node.value)
-
-        if node.leftnode != None:
-            myqueue.enqueue(queue, node.leftnode)
-        if node.rightnode != None:
-            myqueue.enqueue(queue, node.rightnode)
-    return linkedlist.reverseList(valuesQueue)
 
 def print_tree(node, level=0):
     if node is not None:
