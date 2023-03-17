@@ -35,7 +35,7 @@ def rotateRight(Tree,avlnode):
     # Si el hijo izquierdo de la antigua raiz tenia un hijo derecho, este pasa a ser hijo izquierdo de la antigua raiz
     if Tree.root.rightnode != None:
         avlnode.leftnode = Tree.root.rightnode
-        Tree.root.rightnode.parent = avlnode
+        Tree.root.rightnode.parent = Tree.root
     # La antigua raiz pasa a ser hijo derecho de la nueva raiz
     Tree.root.rightnode = avlnode
     # Retorno la nueva raiz del arbol
@@ -75,11 +75,37 @@ def calculateBalance(AVLTree):
     calcBalanceR(AVLTree.root)
     return AVLTree
 
+# EJERCICIO 3
 
+def reBalanceR(avlnode):
+    if avlnode == None:
+        return
+    if avlnode.bf < -1:
+        if avlnode.rightnode.bf > 1:
+            rotateRight(avlnode.rightnode)
+            rotateLeft(avlnode)
+        else:
+            rotateLeft(avlnode)
+    elif avlnode.bf > 1:
+        if avlnode.leftnode.bf < -1:
+            rotateLeft(avlnode.leftnode)
+            rotateRight(avlnode)
+    else:
+        rotateRight(avlnode)
+
+
+def reBalance(AVLTree):
+    if AVLTree.root == None:
+        return
+    calculateBalance(AVLTree)
+    reBalanceR(AVLTree.root)
     
+    return AVLTree
     
-
-
+    if AVLTree.root.bf < 1:
+        rotateLeft(AVLTree, AVLTree.root)
+    if AVLTree.root.bf > 1:
+        rotateRight(AVLTree,AVLTree.root)
 
 # Implementaciones Binary tree: search, insert, delete, deleteKey, access, update
 
