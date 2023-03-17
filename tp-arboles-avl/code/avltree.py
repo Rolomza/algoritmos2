@@ -41,23 +41,43 @@ def rotateRight(Tree,avlnode):
     # Retorno la nueva raiz del arbol
     return Tree.root
 
+# EJERCICIO 2
+
+def findHeight(node):
+    # Caso base
+    if node == None:
+        return -1
+    # Casos recursivos
+    leftHeight = findHeight(node.leftnode)
+    rightHeight = findHeight(node.rightnode)
+    # Comparo las alturas y retorno recursivamente la mayor entre la izq y la der
+    if leftHeight >= rightHeight:
+        return 1 + leftHeight
+    return 1 + rightHeight
+
+def calcBalanceR(avlnode):
+    # Caso base
+    if avlnode == None:
+        return 0
+    # Casos recursivos
+    leftHeight = calcBalanceR(avlnode.leftnode)
+    rightHeight = calcBalanceR(avlnode.rightnode)
+    # Calculo y actualizo el balance factor del nodo
+    avlnode.bf = leftHeight - rightHeight
+    # El retorno recursivo lleva implicito el valor de la altura del nodo mediante una funcion recursiva que calcula la altura del mismo
+    return 1 + findHeight(avlnode)
+    
+
+def calculateBalance(AVLTree):
+    if AVLTree.root == None:
+        return
+    # Llamado a funcion recursiva
+    calcBalanceR(AVLTree.root)
+    return AVLTree
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
 
 
 
@@ -223,12 +243,6 @@ def recursiveInOrderTreeWalk(treeNode):
         recursiveInOrderTreeWalk(treeNode.leftnode)
         print(treeNode.value)
         recursiveInOrderTreeWalk(treeNode.rightnode)
-
-def traversePreorder(root):
-    if root:
-        print(root.value),
-        traversePreorder(root.leftnode)
-        traversePreorder(root.rightnode)
 
 def traverseBreadFirst(B):
     queue = linkedlist.LinkedList()

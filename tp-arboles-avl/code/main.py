@@ -1,14 +1,26 @@
 from avltree import *
 
 myAvlTree = AVLTree()
-insert(myAvlTree, 10, 10)
-insert(myAvlTree, 15, 15)
-insert(myAvlTree, 12, 12)
+#Root
 insert(myAvlTree, 20, 20)
 
-traversePreorder(myAvlTree.root)
+#SubArbol Izq
+insert(myAvlTree, 10, 10)
+insert(myAvlTree, 15, 15)
+# insert(myAvlTree, 5, 5)
+# insert(myAvlTree, 2, 2)
 
-rotateLeft(myAvlTree,myAvlTree.root)
+#SubArbol Der
+insert(myAvlTree, 25, 25)
+insert(myAvlTree, 23,23)
+#insert(myAvlTree, 40, 40)
+#insert(myAvlTree, 50, 50)
 
-print('Arbol rotado hacia la izquierda')
-traversePreorder(myAvlTree.root)
+print(myAvlTree.root.bf)
+calculateBalance(myAvlTree)
+print(myAvlTree.root.bf)
+
+
+
+
+
