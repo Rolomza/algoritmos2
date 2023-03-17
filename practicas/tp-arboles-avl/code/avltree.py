@@ -17,6 +17,7 @@ class AVLNode:
 def rotateLeft(Tree, avlnode):
     # El nuevo nodo raiz es el hijo derecho de la antigua raiz
     newRootNode = avlnode.rightnode
+    avlnode.rightnode = None
     # Si el nodo raiz anterior era la raiz del arbol, asignar su hijo derecho como nueva raiz del arbol
     if avlnode.parent == None:
         Tree.root = newRootNode
@@ -32,11 +33,12 @@ def rotateLeft(Tree, avlnode):
     newRootNode.leftnode = avlnode
     avlnode.parent = newRootNode
     # Retorno la nueva raiz del arbol
-    return Tree.root
+    return newRootNode
 
 def rotateRight(Tree,avlnode):
     # El nuevo nodo raiz es el hijo izquierdo de la antigua raiz
     newRootNode = avlnode.leftnode
+    avlnode.leftnode = None
     # Si el nodo raiz anterior era la raiz del arbol, asignar su hijo derecho como nueva raiz del arbol
     if avlnode.parent == None:
         Tree.root = newRootNode
@@ -52,7 +54,7 @@ def rotateRight(Tree,avlnode):
     newRootNode.rightnode = avlnode
     avlnode.parent = newRootNode
     # Retorno la nueva raiz del arbol
-    return Tree.root
+    return newRootNode
 
 # EJERCICIO 2
 
@@ -90,38 +92,60 @@ def calculateBalance(AVLTree):
 
 # EJERCICIO 3
 
-def reBalanceR(avlnode):
+def reBalanceR(AVLTree, avlnode):
     if avlnode == None:
         return
     if avlnode.bf < -1:
-        if avlnode.rightnode.bf > 1:
-            rotateRight(avlnode.rightnode)
-            rotateLeft(avlnode)
+        if avlnode.rightnode.bf > 0:
+            rotateRight(AVLTree, avlnode.rightnode)
+            avlnode = rotateLeft(AVLTree, avlnode)
         else:
-            rotateLeft(avlnode)
+            avlnode = rotateLeft(AVLTree, avlnode)
+        calculateBalance(AVLTree)
     elif avlnode.bf > 1:
-        if avlnode.leftnode.bf < -1:
-            rotateLeft(avlnode.leftnode)
-            rotateRight(avlnode)
-    else:
-        rotateRight(avlnode)
-
+        if avlnode.leftnode.bf < 0:
+            rotateLeft(AVLTree, avlnode.leftnode)
+            avlnode = rotateRight(AVLTree, avlnode)
+        else:
+            avlnode = rotateRight(AVLTree, avlnode)
+        calculateBalance(AVLTree)
+    reBalanceR(AVLTree, avlnode.leftnode)
+    reBalanceR(AVLTree, avlnode.rightnode)
 
 def reBalance(AVLTree):
     if AVLTree.root == None:
         return
     calculateBalance(AVLTree)
-    reBalanceR(AVLTree.root)
+    reBalanceR(AVLTree, AVLTree.root)
     
     return AVLTree
-    
-    if AVLTree.root.bf < 1:
-        rotateLeft(AVLTree, AVLTree.root)
-    if AVLTree.root.bf > 1:
-        rotateRight(AVLTree,AVLTree.root)
 
 # EJERCICIO 4
 
+def insert(AVLTree,element,key):
+    current = AVLTree.root
+    newNode = AVLNode()
+    newNode.key = key
+    newNode.value = element
+    if current == None:
+        AVLTree.root = newNode
+        return key
+    recursiveInsert(newNode,AVLTree.root)
+    
+
+def recursiveInsert(newNode, treeNode):
+    if newNode.key > treeNode.key:
+        if treeNode.rightnode == None:
+            treeNode.rightnode = newNode
+            newNode.parent = treeNode
+        else:
+            recursiveInsert(newNode, treeNode.rightnode)
+    else:
+        if treeNode.leftnode == None:
+            treeNode.leftnode = newNode
+            newNode.parent = treeNode
+        else:
+            recursiveInsert(newNode, treeNode.leftnode)
 
 
 # EJERCICIO 5
@@ -176,15 +200,15 @@ def searchKeyR(node, key):
             return searchKeyR(node.rightnode, key)
         return
 
-def insert(B,element,key):
-    current = B.root
+def insert(AVLTree,element,key):
+    current = AVLTree.root
     newNode = AVLNode()
     newNode.key = key
     newNode.value = element
     if current == None:
-        B.root = newNode
+        AVLTree.root = newNode
         return key
-    recursiveInsert(newNode,B.root)
+    recursiveInsert(newNode,AVLTree.root)
     
 
 def recursiveInsert(newNode, treeNode):
@@ -305,3 +329,9 @@ def traverseBreadFirst(B):
         if node.rightnode != None:
             myqueue.enqueue(queue, node.rightnode)
     return linkedlist.reverseList(valuesQueue)
+
+def print_tree(node, level=0):
+    if node is not None:
+        print_tree(node.rightnode, level+1)
+        print(' ' * 4 * level + '->', node.key, f"(bf={node.bf})")
+        print_tree(node.leftnode, level+1)
