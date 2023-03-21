@@ -14,6 +14,8 @@ class AVLNode:
 def rotateLeft(Tree, avlnode):
     # El nuevo nodo raiz es el hijo derecho de la antigua raiz
     newRootNode = avlnode.rightnode
+    if avlnode.parent != None:
+        avlnode.parent.rightnode = newRootNode
     avlnode.rightnode = None
     # Si el nodo raiz anterior era la raiz del arbol, asignar su hijo derecho como nueva raiz del arbol
     if avlnode.parent == None:
@@ -35,6 +37,8 @@ def rotateLeft(Tree, avlnode):
 def rotateRight(Tree,avlnode):
     # El nuevo nodo raiz es el hijo izquierdo de la antigua raiz
     newRootNode = avlnode.leftnode
+    if avlnode.parent != None:
+        avlnode.parent.leftnode = newRootNode
     avlnode.leftnode = None
     # Si el nodo raiz anterior era la raiz del arbol, asignar su hijo derecho como nueva raiz del arbol
     if avlnode.parent == None:
@@ -120,20 +124,24 @@ def reBalance(AVLTree):
         return
     calculateBalance(AVLTree)
     reBalanceR(AVLTree, AVLTree.root)
-    
     return AVLTree
+
 
 # EJERCICIO 4
 
 def insert(AVLTree,element,key):
     current = AVLTree.root
+    # Creo un nuevo nodo con la key y value ingresada por el usuario
     newNode = AVLNode()
     newNode.key = key
     newNode.value = element
     if current == None:
         AVLTree.root = newNode
+        calculateBalance(AVLTree)
         return key
     recursiveInsert(newNode,AVLTree.root)
+    # Una vez insertado el nodo, calculo el bf de cada nodo y balanceo desde el nodo insertado hasta la raiz del arbol
+    updateBfAndBalance(AVLTree, newNode)
     
 
 def recursiveInsert(newNode, treeNode):
@@ -149,6 +157,15 @@ def recursiveInsert(newNode, treeNode):
             newNode.parent = treeNode
         else:
             recursiveInsert(newNode, treeNode.leftnode)
+
+def updateBfAndBalance(tree, node):
+    if node == None:
+        return
+    calcBalanceR(node)
+    if abs(node.bf) > 1:
+        reBalanceR(tree, node)
+        return
+    updateBfAndBalance(tree, node.parent)
 
 
 # EJERCICIO 5
@@ -202,31 +219,6 @@ def searchKeyR(node, key):
         if node.rightnode != None:
             return searchKeyR(node.rightnode, key)
         return
-
-def insert(AVLTree,element,key):
-    current = AVLTree.root
-    newNode = AVLNode()
-    newNode.key = key
-    newNode.value = element
-    if current == None:
-        AVLTree.root = newNode
-        return key
-    recursiveInsert(newNode,AVLTree.root)
-    
-
-def recursiveInsert(newNode, treeNode):
-    if newNode.key > treeNode.key:
-        if treeNode.rightnode == None:
-            treeNode.rightnode = newNode
-            newNode.parent = treeNode
-        else:
-            recursiveInsert(newNode, treeNode.rightnode)
-    else:
-        if treeNode.leftnode == None:
-            treeNode.leftnode = newNode
-            newNode.parent = treeNode
-        else:
-            recursiveInsert(newNode, treeNode.leftnode)
 
 
 def treeMinimum(node):
