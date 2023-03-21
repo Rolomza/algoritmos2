@@ -50,7 +50,7 @@ def rotateRight(Tree,avlnode):
     # Si el hijo izquierdo de la antigua raiz tenia un hijo derecho, este pasa a ser hijo izquierdo de la antigua raiz
     if newRootNode.rightnode != None:
         avlnode.leftnode = newRootNode.rightnode
-        newRootNode.right.parent = avlnode
+        newRootNode.rightnode.parent = avlnode
     # El antiguo nodo raiz pasa a ser el hijo derecho del nuevo nodo raiz
     newRootNode.rightnode = avlnode
     avlnode.parent = newRootNode
@@ -137,7 +137,7 @@ def insert(AVLTree,element,key):
     newNode.value = element
     if current == None:
         AVLTree.root = newNode
-        calculateBalance(AVLTree)
+        AVLTree.root.bf = 0
         return key
     recursiveInsert(newNode,AVLTree.root)
     # Una vez insertado el nodo, calculo el bf de cada nodo y balanceo desde el nodo insertado hasta la raiz del arbol
@@ -165,11 +165,72 @@ def updateBfAndBalance(tree, node):
     if abs(node.bf) > 1:
         reBalanceR(tree, node)
         return
+    # Llamado recursivo
     updateBfAndBalance(tree, node.parent)
 
 
 # EJERCICIO 5
 
+def delete(B,element):
+    nodeToDelete = searchR(B.root,element)
+    flag = 0
+    if nodeToDelete == B.root:
+        flag = 1
+    if nodeToDelete == None:
+        return
+
+    if nodeToDelete.leftnode == None:
+        transplant(B,nodeToDelete,nodeToDelete.rightnode)
+
+    elif nodeToDelete.rightnode == None:
+        transplant(B,nodeToDelete,nodeToDelete.leftnode)
+
+    else:
+        y = treeMinimum(nodeToDelete.rightnode)
+        if y.parent != nodeToDelete:
+            transplant(B,y,y.rightnode)
+            y.rightnode = nodeToDelete.rightnode
+            y.rightnode.parent = y
+        transplant(B,nodeToDelete,y)
+        y.leftnode = nodeToDelete.leftnode
+        y.leftnode.parent = y
+    if flag == 1:
+        reBalance(B)
+    else:
+        updateBfAndBalance(B, nodeToDelete.parent)
+    return nodeToDelete.key
+
+def searchR(node, element):
+    if node == None:
+        return
+    if node.value == element:
+        return node
+    right = searchR(node.rightnode, element)
+    if right != None:
+        return right
+    left = searchR(node.leftnode, element)
+    if left != None:
+        return left
+
+def treeMinimum(node):
+    while node.leftnode != None:
+        node = node.leftnode
+    return node
+
+def treeMaximum(node):
+    while node.rightnode != None:
+        node = node.rightnode
+    return node
+
+def transplant(B,u,v):
+    if u.parent == None:
+        B.root = v
+    elif u == u.parent.leftnode:
+        u.parent.leftnode = v
+    else:
+        u.parent.rightnode = v
+    if v != None:
+        v.parent = u.parent
 
 
 # Implementaciones Binary tree: search, insert, delete, deleteKey, access, update
@@ -184,19 +245,6 @@ def search(B, element):
         return searchR(current, element).key
     except:
         return
-
-
-def searchR(node, element):
-    if node == None:
-        return
-    if node.value == element:
-        return node
-    right = searchR(node.rightnode, element)
-    if right != None:
-        return right
-    left = searchR(node.leftnode, element)
-    if left != None:
-        return left
 
 
 def searchKey(B, key):
@@ -219,70 +267,6 @@ def searchKeyR(node, key):
         if node.rightnode != None:
             return searchKeyR(node.rightnode, key)
         return
-
-
-def treeMinimum(node):
-    while node.leftnode != None:
-        node = node.leftnode
-    return node
-
-def treeMaximum(node):
-    while node.rightnode != None:
-        node = node.rightnode
-    return node
-
-def transplant(B,u,v):
-    if u.parent == None:
-        B.root = v
-    elif u == u.parent.leftnode:
-        u.parent.leftnode = v
-    else:
-        u.parent.rightnode = v
-    if v != None:
-        v.parent = u.parent
-
-def delete(B,element):
-    nodeToDelete = searchR(B.root,element)
-    if nodeToDelete == None:
-        return
-
-    if nodeToDelete.leftnode == None:
-        transplant(B,nodeToDelete,nodeToDelete.rightnode)
-
-    elif nodeToDelete.rightnode == None:
-        transplant(B,nodeToDelete,nodeToDelete.leftnode)
-
-    else:
-        y = treeMinimum(nodeToDelete.rightnode)
-        if y.parent != nodeToDelete:
-            transplant(B,y,y.rightnode)
-            y.rightnode = nodeToDelete.rightnode
-            y.rightnode.parent = y
-        transplant(B,nodeToDelete,y)
-        y.leftnode = nodeToDelete.leftnode
-        y.leftnode.parent = y
-
-    return nodeToDelete.key
-
-
-def deleteKey(B, key):
-    current = searchKey(B, key)
-    if current == None:
-        return
-    if current.leftnode == None:
-        transplant(B, current, current.rightnode)
-    elif current.rightnode == None:
-        transplant(B, current, current.leftnode)
-    else:
-        nodeMin = treeMinimum(current.rightnode)
-        if nodeMin.parent != current:
-            transplant(B, nodeMin, nodeMin.rightnode)
-            nodeMin.rightnode = current.rightnode
-            nodeMin.parent.rightnode = nodeMin
-        transplant(B, current, nodeMin)
-        nodeMin.leftnode = current.leftnode
-        nodeMin.leftnode.parent = nodeMin
-    return current.key
 
 def access(B, key):
     current = searchKey(B, key)
