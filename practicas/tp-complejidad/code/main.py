@@ -30,8 +30,11 @@ print(ordenarLista(miLista))
 # Ejercicio 5
 
 def contieneSuma(A,n):
+    # Creo un conjunto vacio
     S = set()
     for num in A:
+        # Recorro la lista y voy revisando si existe el complemento del numero actual en esa lista
+        # si no existe, lo agrego, si existe significa que hay un par de valores cuya suma me da el entero buscado
         if n - num in S:
             return True
         S.add(num)
