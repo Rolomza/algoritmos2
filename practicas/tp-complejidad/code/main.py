@@ -30,31 +30,11 @@ print(ordenarLista(miLista))
 # Ejercicio 5
 
 def contieneSuma(A,n):
-    return
+    S = set()
+    for num in A:
+        if n - num in S:
+            return True
+        S.add(num)
+    return False
 
-def insertionSort(arr):
- 
-    # Traverse through 1 to len(arr)
-    for i in range(1, len(arr)):
- 
-        key = arr[i]
- 
-        # Move elements of arr[0..i-1], that are
-        # greater than key, to one position ahead
-        # of their current position
-        j = i-1
-        while j >= 0 and key < arr[j] :
-                print('entro aca')
-                arr[j + 1] = arr[j]
-                j -= 1
-        arr[j + 1] = key
- 
- 
-# Driver code to test above
-arr = [1, 1, 1, 1, 1]
-
-# insertionSort(arr)
-# print(arr)
-
-# for i in range(len(arr)):
-#     print ("% d" % arr[i])
+print(contieneSuma([1,2,3],5))
