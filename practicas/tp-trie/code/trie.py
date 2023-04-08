@@ -19,21 +19,13 @@ def insert_recursive(node, element, index):
     if index > len(element) - 1:
         return
     parent = node
-    # print('-- Comienzo de funcion --')
-    # print('index:', index, 'element[index]:', element[index], 'parent:', parent.key)
-    # Busco en el children del actual nodo si existe el primer caracter de mi elemento
     if node.children != []:
         for child in node.children:
             if element[index] == child.key:
-                print('Llamado recursivo')
                 insert_recursive(child, element, index + 1)
                 return
-    # print('-- Antes de ingresar al while --')
-    # print('index:', index, 'element[index]:', element[index], 'parent:', parent.key)
     
     while index <= len(element) - 1:
-        # print('-- Crear e insertar nuevo nodo no existente: --')
-        # print('index:',index,'element[index]:', element[index], 'parent:', parent.key)
         newNode = TrieNode()
         newNode.key = element[index]
         newNode.parent = parent
@@ -44,6 +36,22 @@ def insert_recursive(node, element, index):
     newNode.isEndOfWord = True
     return
 
+def search(T,element):
+    if element == '':
+        return False
+    index = 0
+    return search_recursive(T.root, element, index)
 
+def search_recursive(node, element, index):
+    if index > len(element) - 1:
+        if node.isEndOfWord == True:
+            return True
+        else:
+            return False
 
-
+    if node.children != []:
+        for child in node.children:
+            if element[index] == child.key:
+                #print('Letra hallada:', element[index])
+                return search_recursive(child, element, index + 1)
+    return False
