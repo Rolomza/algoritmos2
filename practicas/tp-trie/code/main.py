@@ -2,5 +2,10 @@ from trie import *
 
 myTrieTree = Trie()
 
-insert(myTrieTree, 'la')
-print(myTrieTree.root.children)
+print('primera palabra')
+insert(myTrieTree,'sal')
+print('Segunda palabra:')
+insert(myTrieTree,'sol')
+print('Tercera palabra:')
+insert(myTrieTree,'santo')
+print(myTrieTree.root.children[0].children[0].children[1].children[0].children[0].key)
