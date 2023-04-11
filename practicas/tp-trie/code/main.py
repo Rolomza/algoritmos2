@@ -10,4 +10,4 @@ insert(myTrieTree,'sal')
 insert(myTrieTree,'espada')
 insert(myTrieTree,'estado')
 
-print(starts_with(myTrieTree,'a',3))
+print(starts_with(myTrieTree,'e',6))

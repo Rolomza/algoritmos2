@@ -96,29 +96,38 @@ def traverse_list(list, ch):
 # EJERCICIO 4
 
 def starts_with(T, p, n):
-    def find_words(current, words, current_str, max_length):
-        # Recursive function for searching the word
-        # When the length is reached
-        if len(current_str) == max_length:
-            if current.isEndOfWord:
-                # Adds the word and quits recursion
-                words.append(current_str)
-            return
-        # For every child
-        for child in current.children:
-            find_words(child, words, current_str + child.key, max_length)
     # Checks there if exists any word starting with char
     for child in T.root.children:
         if child.key == p:
             break
     else:
         return
-    
     words = []
     find_words(child, words, child.key, n)
     return words
 
 # EJERCICIO 5
 
+# def equal(T1,T2):
+#   res1 = [] 
+#   create_word_list(T1.root,res1,"",None)
+#   res2 = []
+#   create_word_list(T2.root,res2,"",None)
+#   if res1 == res2:  ### Compara ambas listas ###
+#     return True
+#   else:
+#     return False
 
+# Funciones auxiliares
 
+def find_words(current, words, current_str, max_length):
+        # Funcion recursiva para buscar la palabra
+        # Cuando es alcanzado el largo de la palabra
+        if len(current_str) == max_length:
+            if current.isEndOfWord:
+                # Agregar la palabra y salir de la recursion
+                words.append(current_str)
+            return
+        # Llamado recursivo para cada hijo
+        for child in current.children:
+            find_words(child, words, current_str + child.key, max_length)
