@@ -93,4 +93,32 @@ def traverse_list(list, ch):
          return index
     return None
 
+# EJERCICIO 4
+
+def starts_with(T, p, n):
+    def find_words(current, words, current_str, max_length):
+        # Recursive function for searching the word
+        # When the length is reached
+        if len(current_str) == max_length:
+            if current.isEndOfWord:
+                # Adds the word and quits recursion
+                words.append(current_str)
+            return
+        # For every child
+        for child in current.children:
+            find_words(child, words, current_str + child.key, max_length)
+    # Checks there if exists any word starting with char
+    for child in T.root.children:
+        if child.key == p:
+            break
+    else:
+        return
+    
+    words = []
+    find_words(child, words, child.key, n)
+    return words
+
+# EJERCICIO 5
+
+
 
