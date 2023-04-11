@@ -9,6 +9,8 @@ class TrieNode:
         self.key = None
         self.isEndOfWord = False
 
+# EJERCICIO 1
+
 def insert(T,element):
     if element == '':
         return
@@ -55,3 +57,40 @@ def search_recursive(node, element, index):
                 #print('Letra hallada:', element[index])
                 return search_recursive(child, element, index + 1)
     return False
+
+# EJERCICIO 3
+
+def delete(T,element):
+  if search(T,element) == False:
+    return False
+    
+  node = T.root
+  for ch in element:  ### Recorre cada letra del elemento (palabra) ###
+    index = traverse_list(node.children,ch)
+    if index == None:  ### No se encuentra la letra en la lista ###
+      return False
+    else:  ### Se encuentra la letra en la lista ###
+      node = node.children[index]  ### Sigue al proximo nodo ###
+  if node.children != []:  ### Si la palabra a eliminar es parte de una palabra mas larga (hola,holanda) ###
+    node.isEndOfWord == False
+    return True
+  else:
+    delete_node(T,node)
+    return True
+
+def delete_node(T,node):
+  temp = node 
+  node = node.parent 
+  node.children.remove(temp)  
+  if node.isEndOfWord == True or node == T.root or len(node.children) > 0:
+    return True
+  else:
+    delete_node(T,node)
+
+def traverse_list(list, ch):
+    for index, i in enumerate(list):
+      if i.key == ch:
+         return index
+    return None
+
+

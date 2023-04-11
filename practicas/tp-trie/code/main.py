@@ -2,16 +2,14 @@ from trie import *
 
 myTrieTree = Trie()
 
-#print('primera palabra')
+insert(myTrieTree,'ala')
+insert(myTrieTree,'alambre')
 insert(myTrieTree,'sal')
-#print('Segunda palabra:')
-insert(myTrieTree,'sol')
-#print('Tercera palabra:')
-insert(myTrieTree,'santo')
-insert(myTrieTree,'solana')
-insert(myTrieTree,'pan')
-insert(myTrieTree,'palco')
+insert(myTrieTree,'espada')
+insert(myTrieTree,'estado')
 
-#print(myTrieTree.root.children[1].children[0].children[1].key)
-
-print(search(myTrieTree, 'palco'))
+print(myTrieTree.root.children[2].key)
+print(myTrieTree.root.children[2].children[0].children)
+print(delete(myTrieTree,'estado'))
+print(myTrieTree.root.children[2].key)
+print(myTrieTree.root.children[2].children[0].children)
