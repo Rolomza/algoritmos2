@@ -12,4 +12,4 @@ insert(myTrieTree,'estado')
 insert(myTrieTree,'especial')
 insert(myTrieTree,'eco')
 
-print(starts_with(myTrieTree,'e',None))
+print(starts_with(myTrieTree,'a',None))

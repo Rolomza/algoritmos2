@@ -108,20 +108,9 @@ def starts_with(T, p, n):
 
 # EJERCICIO 5
 
-def equal(T1,T2):
-  res1 = [] 
-  create_word_list(T1.root,res1,"",None)
-  res2 = []
-  create_word_list(T2.root,res2,"",None)
-  if res1 == res2:  ### Compara ambas listas ###
-    return True
-  else:
-    return False
-
 # Funciones auxiliares
 
 def find_words(currentNode, words, current_str, max_length):
-        # Funcion recursiva para buscar la palabra
         # Cuando es alcanzado el largo de la palabra
         if currentNode.isEndOfWord:
             if max_length != None:
