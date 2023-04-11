@@ -9,5 +9,7 @@ insert(myTrieTree,'alambre')
 insert(myTrieTree,'sal')
 insert(myTrieTree,'espada')
 insert(myTrieTree,'estado')
+insert(myTrieTree,'especial')
+insert(myTrieTree,'eco')
 
-print(starts_with(myTrieTree,'e',6))
+print(starts_with(myTrieTree,'e',None))
