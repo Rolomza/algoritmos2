@@ -2,14 +2,12 @@ from trie import *
 
 myTrieTree = Trie()
 
-insert(myTrieTree,'ala')
-insert(myTrieTree,'aso')
-insert(myTrieTree,'ama')
-insert(myTrieTree,'alambre')
+insert(myTrieTree,'al')
+insert(myTrieTree,'alamo')
+insert(myTrieTree,'alto')
 insert(myTrieTree,'sal')
-insert(myTrieTree,'espada')
-insert(myTrieTree,'estado')
-insert(myTrieTree,'especial')
-insert(myTrieTree,'eco')
+insert(myTrieTree,'sancho')
 
-print(starts_with(myTrieTree,'a',None))
+
+print(print_trie_words(myTrieTree))
+

@@ -22,9 +22,9 @@ def insert_recursive(node, element, index):
         return
     parent = node
     if node.children != []:
-        for child in node.children:
-            if element[index] == child.key:
-                insert_recursive(child, element, index + 1)
+        for node in node.children:
+            if element[index] == node.key:
+                insert_recursive(node, element, index + 1)
                 return
     
     while index <= len(element) - 1:
@@ -52,10 +52,9 @@ def search_recursive(node, element, index):
             return False
 
     if node.children != []:
-        for child in node.children:
-            if element[index] == child.key:
-                #print('Letra hallada:', element[index])
-                return search_recursive(child, element, index + 1)
+        for node in node.children:
+            if element[index] == node.key:
+                return search_recursive(node, element, index + 1)
     return False
 
 # EJERCICIO 3
@@ -95,31 +94,47 @@ def traverse_list(list, ch):
 
 # EJERCICIO 4
 
-def starts_with(T, p, n):
-    # Checks there if exists any word starting with char
-    for child in T.root.children:
-        if child.key == p:
-            break
-    else:
-        return
-    words = []
-    find_words(child, words, child.key, n)
-    return words
+# def starts_with(T, p, n):
+#     for node in T.root.children:
+#         if node.key == p:
+#             break
+#     else:
+#         return
+#     words = []
+#     find_words(node, words, node.key, n)
+#     return words
 
 # EJERCICIO 5
 
+
+
 # Funciones auxiliares
 
-def find_words(currentNode, words, current_str, max_length):
-        # Cuando es alcanzado el largo de la palabra
-        if currentNode.isEndOfWord:
-            if max_length != None:
-                if len(current_str) == max_length:
-                    # Agregar la palabra y salir de la recursion
-                    words.append(current_str)
-                return
-            else:
-                words.append(current_str)
-        # Llamado recursivo para cada hijo
-        for child in currentNode.children:
-            find_words(child, words, current_str + child.key, max_length)
+def print_trie_words(T):
+	if T.root!=None:
+		content=[]
+		print_trie_recursive(T.root.children,content,"")
+		return content
+	else:
+		return None
+
+def print_trie_recursive(nl,cadenas,palabra):
+	for node in nl:
+		if node.isEndOfWord:
+			cadenas.append(palabra+node.key)
+		if node.children!=None:
+			print_trie_recursive(node.children,cadenas,palabra+node.key)
+	return
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+        
