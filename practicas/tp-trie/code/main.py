@@ -1,17 +1,12 @@
 from trie import *
 
 trie1 = Trie()
-trie2 = Trie()
 
-insert(trie1,'ancho')
-insert(trie1,'ancha')
-insert(trie1,'antes')
-
-insert(trie2,'ancho')
-insert(trie2,'antes')
-insert(trie2,'ancha')
-# insert(trie2,'salco')
+insert(trie1,'ala')
+insert(trie1,'alto')
+insert(trie1,'alo')
+insert(trie1,'alarmante')
+insert(trie1,'alergia')
 
 
-
-print(sameTries(trie1, trie2))
+print(startsWith(trie1,'',0))

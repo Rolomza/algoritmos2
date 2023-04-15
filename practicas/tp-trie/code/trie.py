@@ -95,8 +95,17 @@ def traverse_list(list, ch):
 # EJERCICIO 4
 
 def startsWith(T, p, n):
-    return
-
+    trieWords = print_trie_words(T)
+    patternWords = []
+    for word in trieWords:
+        if p == word[0:len(p)]:
+            # Si no se especifica longitud
+            if n == None:
+                patternWords.append(word)
+            # Si se especifica longitud
+            if len(word) == n:
+                patternWords.append(word)
+    return patternWords
 
 # EJERCICIO 5
 
@@ -106,8 +115,6 @@ def sameTries(T1,T2):
     if T1List == T2List:
         return True
     return False
-
-
 
 # Funciones auxiliares
 
