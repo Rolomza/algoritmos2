@@ -8,4 +8,4 @@ insert(trie1,'altonto')
 insert(trie1,'otlas')
 
 
-print(has_inverted_words(trie1))
+print(auto_complete(trie1,'ot'))

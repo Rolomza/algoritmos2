@@ -126,6 +126,14 @@ def has_inverted_words(T):
             return True
     return False
 
+# EJERCICIO 7
+
+def auto_complete(T,string):
+    patternWords = startsWith(T,string,None)
+    if len(patternWords) == 1:
+        return patternWords[0].replace(string,'')
+    else:
+        return ''
 
 # Funciones auxiliares
 
