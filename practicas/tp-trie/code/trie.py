@@ -94,17 +94,18 @@ def traverse_list(list, ch):
 
 # EJERCICIO 4
 
-# def starts_with(T, p, n):
-#     for node in T.root.children:
-#         if node.key == p:
-#             break
-#     else:
-#         return
-#     words = []
-#     find_words(node, words, node.key, n)
-#     return words
+def startsWith(T, p, n):
+    return
+
 
 # EJERCICIO 5
+
+def sameTries(T1,T2):
+    T1List = print_trie_words(T1)
+    T2List = print_trie_words(T2)
+    if T1List == T2List:
+        return True
+    return False
 
 
 
@@ -118,12 +119,12 @@ def print_trie_words(T):
 	else:
 		return None
 
-def print_trie_recursive(nl,cadenas,palabra):
-	for node in nl:
+def print_trie_recursive(children,wordsList,prefix):
+	for node in children:
 		if node.isEndOfWord:
-			cadenas.append(palabra+node.key)
+			wordsList.append(prefix + node.key)
 		if node.children!=None:
-			print_trie_recursive(node.children,cadenas,palabra+node.key)
+			print_trie_recursive(node.children, wordsList, prefix + node.key)
 	return
 
     

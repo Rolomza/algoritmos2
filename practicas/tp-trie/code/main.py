@@ -1,13 +1,17 @@
 from trie import *
 
-myTrieTree = Trie()
+trie1 = Trie()
+trie2 = Trie()
 
-insert(myTrieTree,'al')
-insert(myTrieTree,'alamo')
-insert(myTrieTree,'alto')
-insert(myTrieTree,'sal')
-insert(myTrieTree,'sancho')
+insert(trie1,'ancho')
+insert(trie1,'ancha')
+insert(trie1,'antes')
+
+insert(trie2,'ancho')
+insert(trie2,'antes')
+insert(trie2,'ancha')
+# insert(trie2,'salco')
 
 
-print(print_trie_words(myTrieTree))
 
+print(sameTries(trie1, trie2))
