@@ -116,6 +116,17 @@ def sameTries(T1,T2):
         return True
     return False
 
+# EJERCICIO 6
+
+def has_inverted_words(T):
+    trieWords = print_trie_words(T)
+    for word in trieWords:
+        reversedWord = "".join(reversed(word))
+        if reversedWord in trieWords:
+            return True
+    return False
+
+
 # Funciones auxiliares
 
 def print_trie_words(T):
@@ -124,7 +135,7 @@ def print_trie_words(T):
 		print_trie_recursive(T.root.children,content,"")
 		return content
 	else:
-		return None
+		return
 
 def print_trie_recursive(children,wordsList,prefix):
 	for node in children:

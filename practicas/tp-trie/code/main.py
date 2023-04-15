@@ -2,11 +2,10 @@ from trie import *
 
 trie1 = Trie()
 
-insert(trie1,'ala')
 insert(trie1,'alto')
-insert(trie1,'alo')
-insert(trie1,'alarmante')
-insert(trie1,'alergia')
+insert(trie1,'altopico')
+insert(trie1,'altonto')
+insert(trie1,'otlas')
 
 
-print(startsWith(trie1,'',0))
+print(has_inverted_words(trie1))
