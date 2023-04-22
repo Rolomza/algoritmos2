@@ -1,38 +1,66 @@
-# Acompañamiento de teoria
+import dictionary
+import math
 
-class Dictionary:
-    def __init__(self,slots):
-        # slots equivale a 'm' en la teoria
-        self.slots = slots
-        self.table = [[] for _ in range(slots)]
+# Ejercicio 1
 
-    def hash_function(self,k):
-        return k % 5
+'''
+Ejemplificar que pasa cuando insertamos las llaves 5, 28, 19, 15, 20, 33, 12, 17, 10 en un HashTable
+con la colisión resulta por el método de chaining. Permita que la tabla tenga 9 slots y la función de
+hash: H (k) = k mod 9
+'''
 
-    def insert(self,key,value):
-        self.table[self.hash_function(key)].append((key,value))
-        return self.table
-    
-    def search(self,key):
-        table_slot = self.hash_function(key)
-        for tuple in self.table[table_slot]:
-            if tuple[0] == key:
-                return tuple[1]
+def exercise1():
+    print('Exercise 1')
+    hash_function1 = lambda k : k % 9
+    hash_table = dictionary.Dictionary(9,hash_function1)
+    keys_set = [5,28,19,15,20,33,12,17,10]
+    for key in keys_set:
+        hash_table.insert(key,'data')
+    print(hash_table.table)
+    print('')
 
-    def delete(self,key):
-        table_slot = self.hash_function(key)
-        for tuple in self.table[table_slot]:
-            if tuple[0] == key:
-                self.table[table_slot].remove(tuple)
+exercise1()
+
+# Ejercicio 2: Implementacion de la estructura dictionary con sus metodos (insert,search y delete) ver archivo dictionary.py
+
+# Ejercicio 3
+
+'''
+Considerar una tabla hash de tamaño m = 1000 y una función de hash correspondiente al
+método de la multiplicación donde A = (sqrt(5)-1)/2). Calcular las ubicaciones para las claves
+61,62,63,64 y 65.
+
+'''
+
+def exercise2():
+    print('Exercise 2')
+    A = (math.sqrt(5)-1) / 2
+    hash_function3 = lambda k: math.floor(1000*(k*A % 1))
+    keys_set3 = [61,62,63,64,65]
+
+    for key in keys_set3:
+        print('h(%d):' %key,hash_function3(key))
+    print('')
+
+exercise2()
+
+# Ejercicio 4
+
+'''
+Implemente un algoritmo lo más eficiente posible que devuelva True o False a la siguiente
+proposición: dado dos strings s1...sk y p1...pk, se quiere encontrar si los caracteres de p1...pk
+corresponden a una permutación de s1...sk. Justificar el coste en tiempo de la solución propuesta.
+
+Ejemplo 1:
+Entrada: S = 'hola' , P = 'ahlo'
+Salida: True, ya que P es una permutación de S
+Ejemplo 2:
+Entrada: S = 'hola' , P = 'ahdo'
+Salida: Falso, ya que P tiene al carácter 'd' que no se encuentra en S por lo que no es una
+permutación de S
+
+'''
 
 
-dict1 = Dictionary(6)
-print('Dictionary original')
-print(dict1.table)
-print('Dictionary con insert')
-dict1.insert(0,100)
-dict1.insert(3,20)
-dict1.insert(8,99)
-print(dict1.table)
-dict1.delete(8)
-print(dict1.table)
+
+
