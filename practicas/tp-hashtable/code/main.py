@@ -61,6 +61,29 @@ permutación de S
 
 '''
 
+def is_permutation(string1,string2):
+    if len(string1) != len(string2) or string1 == string2:
+        return False
+    
+    str_length = len(string1)
+    A = (math.sqrt(5)-1) / 2
+    hash_function = lambda k: math.floor(str_length*(k*A % 1))
+    hash_table = dictionary.Dictionary(str_length,hash_function)
+
+    for char in string1:
+        hash_table.insert(ord(char),char)
+    
+    for char in string2:
+        if hash_table.search(ord(char)) == None:
+            return False
+    
+    return True
+
+
+
+
+    
+    
 
 
 
