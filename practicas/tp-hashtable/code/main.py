@@ -19,7 +19,7 @@ def exercise1():
     print(hash_table.table)
     print('')
 
-exercise1()
+#exercise1()
 
 # Ejercicio 2: Implementacion de la estructura dictionary con sus metodos (insert,search y delete) ver archivo dictionary.py
 
@@ -42,7 +42,7 @@ def exercise2():
         print('h(%d):' %key,hash_function3(key))
     print('')
 
-exercise2()
+#exercise2()
 
 # Ejercicio 4
 
@@ -79,11 +79,32 @@ def is_permutation(string1,string2):
     
     return True
 
+# Ejercicio 5
+
+'''
+Implemente un algoritmo que devuelva True si la lista que recibe de entrada tiene todos sus
+elementos únicos, y Falso en caso contrario. Justificar el coste en tiempo de la solución
+propuesta.
+Ejemplo 1:
+Entrada: L = [1,5,12,1,2]
+Salida: Falso, L no tiene todos sus elementos únicos, el 1 se repite en la 1ra y 4ta posición
+'''
+
+def has_unique_elements(list):
+    list_length = len(list)
+
+    A = (math.sqrt(5)-1) / 2
+    hash_function = lambda k: math.floor(list_length*(k*A % 1))
+    hash_table = dictionary.Dictionary(list_length,hash_function)
+
+    for i in range(len(list)):
+        position = 'position: %d' %(i+1)
+        hash_table.insert(list[i],position)
+        if len(hash_table.table[i]) > 1:
+            return 'Falso, la lista no tiene todos sus elementos unicos',hash_table.table[i]
+    return True
 
 
-
-    
-    
 
 
 
