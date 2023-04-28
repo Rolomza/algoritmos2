@@ -104,7 +104,117 @@ def has_unique_elements(list):
             return 'Falso, la lista no tiene todos sus elementos unicos',hash_table.table[i]
     return True
 
+# Ejercicio 6
 
+'''
+Los nuevos códigos postales argentinos tienen la forma cddddccc, donde c indica un carácter
+(A - Z) y d indica un dígito 0, . . . , 9. Por ejemplo, C1024CWN es el código postal que
+representa a la calle XXXX a la altura 1024 en la Ciudad de Mendoza. Encontrar e
+implementar una función de hash apropiada para los códigos postales argentinos.
+'''
+
+def postal_code_hash_function(code,m):
+    # Codigo postal argentino 
+    province_id = code[0]
+    territorial_subdivision_id = code[1:5]
+    city_block_side = code[5:]
+
+    # Construyo el key numerico
+    code_key = ord(province_id) * 10**4
+    code_key += int(territorial_subdivision_id)
+
+    exp = 2
+    for i in range(len(city_block_side)):
+        code_key += (ord(city_block_side[i]) - ord('A')) * 10**exp
+        exp -= 1
+
+    return code_key % m
+
+# Ejercicio 7
+
+'''
+Implemente un algoritmo para realizar la compresión básica de cadenas utilizando el
+recuento de caracteres repetidos.
+Por ejemplo, la cadena 'aabcccccaaa' se convertiría en 'a2blc5a3'.
+Si la cadena "comprimida" no se vuelve más pequeña que la cadena original, su
+método debería devolver la cadena original.
+Puedes asumir que la cadena sólo tiene letras mayúsculas y minúsculas (a - z, A - Z).
+Justificar el coste en tiempo de la solución propuesta.
+'''
+
+def compress_string(s):
+    if not s:
+        return s  # Si la cadena está vacía, se devuelve tal cual
+
+    compressed = []
+    count = 1  # Contador para llevar el recuento de caracteres repetidos
+    prev_char = s[0]  # Variable para almacenar el caracter previo inicialmente con el primer caracter de la cadena
+
+    for i in range(1, len(s)):
+        if s[i] == prev_char:
+            count += 1
+        else:
+            compressed.append(prev_char + str(count))
+            prev_char = s[i]
+            count = 1
+
+    # Se agrega el último caracter y su contador a la lista comprimida después de finalizar el bucle
+    compressed.append(prev_char + str(count))
+
+    # Se crea la cadena comprimida uniendo los elementos de la lista comprimida
+    compressed_str = ''.join(compressed)
+
+    # Se compara la longitud de la cadena original y la cadena comprimida y se devuelve la cadena original si es más corta
+    if len(compressed_str) >= len(s):
+        return s
+    else:
+        return compressed_str
+    
+# Ejercicio 8
+
+'''
+Se requiere encontrar la primera ocurrencia de un string p1...pk en uno más largo a1...aL.
+Implementar esta estrategia de la forma más eficiente posible con un costo computacional
+menor a O(K*L) (solución por fuerza bruta). Justificar el coste en tiempo de la solución propuesta.
+'''
+
+# Implementacion del algoritmo de Knuth-Morris-Prat para string matching.
+
+def kmp_matcher(pattern, text):
+    m = len(pattern)
+    n = len(text)
+
+    prefix = prefix_table(pattern, m)
+ 
+    # Searching
+    i = 0
+    j = 0
+    while i < n:
+        if text[i] == pattern[j]:
+            if j == m - 1:
+                return i - m + 1
+            j += 1
+            i += 1
+        else:
+            if j > 0:
+                j = prefix[j - 1]
+            else:
+                i += 1
+    return -1
+
+def prefix_table(pattern, pattern_lenght):
+    prefix = [0] * pattern_lenght
+    j = 0
+    for i in range(1, pattern_lenght):
+        if pattern[i] == pattern[j]:
+            prefix[i] = j + 1
+            j += 1
+        else:
+            j = 0
+    return prefix
+
+
+print(kmp_matcher('cada','abracadabra'))
 
 
 
