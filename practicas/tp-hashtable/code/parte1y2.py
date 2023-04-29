@@ -33,7 +33,7 @@ método de la multiplicación donde A = (sqrt(5)-1)/2). Calcular las ubicaciones
 '''
 
 def exercise3():
-    print('Exercise 2')
+    print('Exercise 3')
     A = (math.sqrt(5)-1) / 2
     hash_function3 = lambda k: math.floor(1000*(k*A % 1))
     keys_set3 = [61,62,63,64,65]
@@ -42,7 +42,7 @@ def exercise3():
         print('h(%d):' %key,hash_function3(key))
     print('')
 
-exercise3()
+#exercise3()
 
 # Ejercicio 4
 
@@ -78,6 +78,8 @@ def is_permutation(string1,string2):
             return False
     
     return True
+
+
 
 # Ejercicio 5
 
@@ -183,9 +185,7 @@ menor a O(K*L) (solución por fuerza bruta). Justificar el coste en tiempo de la
 def kmp_matcher(pattern, text):
     m = len(pattern)
     n = len(text)
-
     prefix = prefix_table(pattern, m)
- 
     # Searching
     i = 0
     j = 0
@@ -247,5 +247,3 @@ def is_subset(S,T):
 # setT = [1,2,8,4,5]
 # setS = [1,3]
 # print(is_subset(setS,setT))
-
-# Ejercicio 10

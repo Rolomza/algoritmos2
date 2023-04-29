@@ -41,7 +41,7 @@ def hashing_linear_probing(keys_list,m):
         hash_table.insert(key)
     print('Linear probing hashing:',hash_table.table)
 
-hashing_linear_probing(keys_list,11)
+#hashing_linear_probing(keys_list,11)
 # Resultado = [22, 88, None, None, 4, 15, 28, 17, 59, 31, 10]
 
 def hashing_cuadratic_probing(keys_list,m):
@@ -53,7 +53,7 @@ def hashing_cuadratic_probing(keys_list,m):
         hash_table.insert(key)
     print('Cuadratic probing hashing:',hash_table.table)
 
-hashing_cuadratic_probing(keys_list,11)
+#hashing_cuadratic_probing(keys_list,11)
 # Resultado = [22, None, 88, 17, 4, None, 28, 59, 15, 31, 10]
 
 def double_hashing(keys_list,m):
@@ -66,5 +66,18 @@ def double_hashing(keys_list,m):
         hash_table.insert(key)
     print('Double hashing:',hash_table.table)
 
-double_hashing(keys_list,11)
+#double_hashing(keys_list,11)
 # Resultado = [22, None, 59, 17, 4, 15, 28, 88, None, 31, 10]
+
+def ejercicio12():
+    keys_list = [12,18,13,2,3,23,5,15]
+    hashing_linear_probing(keys_list,10)
+
+#ejercicio12()
+
+def ejercicio13():
+    keys_list = [46,34,42,23,52,33]
+    hashing_linear_probing(keys_list,10)
+
+#ejercicio13()
+
