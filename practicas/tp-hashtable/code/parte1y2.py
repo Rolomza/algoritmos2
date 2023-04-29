@@ -15,7 +15,7 @@ def exercise1():
     hash_table = dictionary.Dictionary(9,hash_function1)
     keys_set = [5,28,19,15,20,33,12,17,10]
     for key in keys_set:
-        hash_table.insert(key,'data')
+        hash_table.insert(key,'')
     print(hash_table.table)
     print('')
 
@@ -32,7 +32,7 @@ método de la multiplicación donde A = (sqrt(5)-1)/2). Calcular las ubicaciones
 
 '''
 
-def exercise2():
+def exercise3():
     print('Exercise 2')
     A = (math.sqrt(5)-1) / 2
     hash_function3 = lambda k: math.floor(1000*(k*A % 1))
@@ -42,7 +42,7 @@ def exercise2():
         print('h(%d):' %key,hash_function3(key))
     print('')
 
-#exercise2()
+exercise3()
 
 # Ejercicio 4
 
@@ -244,8 +244,8 @@ def is_subset(S,T):
             return False
     return True
 
-setT = [1,2,8,4,5]
-setS = [1,3]
-print(is_subset(setS,setT))
+# setT = [1,2,8,4,5]
+# setS = [1,3]
+# print(is_subset(setS,setT))
 
 # Ejercicio 10
