@@ -213,8 +213,39 @@ def prefix_table(pattern, pattern_lenght):
             j = 0
     return prefix
 
+# Complejidad temporal = O(m+n)
 
-print(kmp_matcher('cada','abracadabra'))
+#print(kmp_matcher('cada','abracadabra'))
 
+# Ejercicio 9
 
+'''
+Considerar los conjuntos de enteros S = {s1, . . . , sn} y T = {t1, . . . , tm}. Implemente un
+algoritmo que utilice una tabla de hash para determinar si S ⊆ T (S subconjunto de T). ¿Cuál
+es la complejidad temporal del caso promedio del algoritmo propuesto?
+'''
+# S y T son sets, es decir no tienen elementos repetidos.
 
+def is_subset(S,T):
+    if len(S) > len(T):
+        return False
+    
+    m = len(T)
+    
+    hash_function = lambda k: k % m
+    hash_tableT = dictionary.Dictionary(m,hash_function)
+
+    for num in T:
+        hash_tableT.insert(num,num)
+
+    print(hash_tableT.table)
+    for s in S:
+        if hash_tableT.search(s) != s:
+            return False
+    return True
+
+setT = [1,2,8,4,5]
+setS = [1,3]
+print(is_subset(setS,setT))
+
+# Ejercicio 10
